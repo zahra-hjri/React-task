@@ -1,7 +1,12 @@
 import "./App.css";
+import Header from "./Header/header";
 
 function App() {
-  return <h1>فست فود کاتالوگ</h1>;
+  return (
+    <div>
+      <Header></Header>
+    </div>
+  );
 }
 
 export default App;
