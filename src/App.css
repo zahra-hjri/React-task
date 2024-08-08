@@ -13,3 +13,8 @@
 .wrapper {
   min-height: 100vh;
 }
+
+.container {
+  width: 70%;
+  margin: 0 auto;
+}
