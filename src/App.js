@@ -4,6 +4,7 @@ import CategoryList from "./CategoryList/CategoryList";
 import Header from "./Header/header";
 import axios from "./axios";
 import Loading from "./Loading/loading";
+import FastFoodList from "./FastFoodList/FastFoodList";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -25,7 +26,11 @@ function App() {
     if (loading) {
       return <Loading />;
     }
-    return <div>list</div>;
+    return (
+      <div>
+        <FastFoodList fastFoodItems={fastFoodItems}></FastFoodList>
+      </div>
+    );
   };
 
   return (
