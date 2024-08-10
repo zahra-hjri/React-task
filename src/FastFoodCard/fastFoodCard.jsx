@@ -9,10 +9,10 @@ const FastFoodCard = ({ id, imageUrl, name, ingredients, price }) => {
         </span>
         <img className="rounded-lg" src={imageUrl} alt={name} />
       </div>
-      <strong>{name}</strong>
-      <p>{ingredients}</p>
+      <strong className="text-[12px] block mt-4">{name}</strong>
+      <p className="text-[12px] my-3">{ingredients}</p>
       <button className="w-full h-10 bg-orange-600 rounded-lg text-white py-0.5 flex gap-3 justify-center items-center m-auto">
-        <span> افزودن به سبد خرید</span>
+        <span className="text-[12px]"> افزودن به سبد خرید</span>
         <BiSolidShoppingBagAlt className="text-lg"></BiSolidShoppingBagAlt>
       </button>
     </div>
