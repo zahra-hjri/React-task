@@ -2,14 +2,14 @@ import { BiSolidShoppingBagAlt } from "react-icons/bi";
 
 const FastFoodCard = ({ imageUrl, name, ingredients, price }) => {
   return (
-    <div className="w-full relative flex-col shadow-lg rounded-md h-96">
+    <div className="w-full relative flex-col shadow-lg rounded-md bg-green-400">
       <div className="">
         <span className="bg-green-500 flex items-center justify-center absolute top-6 right-6 text-white text-xs font-medium me-2 px-4 py-0.5 rounded-sm">
           قیمت: {price.toLocaleString()} تومان
         </span>
-        <img className="rounded-md" src={imageUrl} alt={name} />
+        <img className="rounded-md w-full h-full" src={imageUrl} alt={name} />
       </div>
-      <div className="flex flex-col py-4 text-center ">
+      <div className="flex flex-col py-4 text-center bg-red-400">
         <strong className="text-[12px] block mb-3">{name}</strong>
         <p className="text-[10px]  mb-4">{ingredients}</p>
 
