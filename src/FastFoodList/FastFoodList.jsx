@@ -4,7 +4,7 @@ const FastFoodList = ({ fastFoodItems }) => {
   return (
     <div className="grid grid-cols-3 gap-4 py-10">
       {fastFoodItems.map((fastFoodItem) => (
-        <FastFoodCard {...fastFoodItem}></FastFoodCard>
+        <FastFoodCard {...fastFoodItem} key={fastFoodItem.id}></FastFoodCard>
       ))}
     </div>
   );
