@@ -21,7 +21,10 @@ const CategoryList = ({ filterItem }) => {
     }
     return (
       <ul className="flex gap-8 items-center h-full text-[12px] mx-16 font-bold">
-        <li onClick={() => filterItem()}>
+        <li
+          className="hover:text-orange-500 cursor-pointer"
+          onClick={() => filterItem()}
+        >
           <p>همه فست فودها</p>
         </li>
         {categories.map((category) => (
