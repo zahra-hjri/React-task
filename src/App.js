@@ -29,6 +29,12 @@ function App() {
   useEffect(() => {
     fetchData();
   }, []);
+  const [searchItem, setSearchItem] = useState("");
+  const search = async () => {
+    const response = await axios.get(
+      `FastFood/list/${searchItem ? "searchItem=" + searchItem : ""}`
+    );
+  };
 
   const renderContent = () => {
     if (loading) {
