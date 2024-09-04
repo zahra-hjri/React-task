@@ -5,14 +5,15 @@ import Header from "./Header/header";
 import axios from "./axios";
 import Loading from "./Loading/loading";
 import FastFoodList from "./FastFoodList/FastFoodList";
+import SearchBar from "./SearchBar/searchBar";
+import notFound from "./assets/images/404.jpg";
 
 function App() {
-  //loading
+  //STATES
   const [loading, setLoading] = useState(false);
-  // fastfood list
   const [fastFoodItems, setFastFoodItems] = useState([]);
 
-  // fetch
+  // FETCH
   const fetchData = async (categoryId = null) => {
     setLoading(true);
     const response = await axios.get(
@@ -21,7 +22,7 @@ function App() {
     setFastFoodItems(response.data);
     setLoading(false);
   };
-  // filter data
+  // FILTER DATA FUNCTION
   const filterItem = (categoryId) => {
     fetchData(categoryId);
   };
@@ -29,16 +30,35 @@ function App() {
   useEffect(() => {
     fetchData();
   }, []);
-  const [searchItem, setSearchItem] = useState("");
-  const search = async () => {
+  const [value, setValue] = useState("");
+
+  const searchItem = async (term) => {
     const response = await axios.get(
-      `FastFood/list/${searchItem ? "searchItem=" + searchItem : ""}`
+      `FastFood/search/${term ? "?term=" + term : ""}`
     );
+    setFastFoodItems(response.data);
   };
 
   const renderContent = () => {
     if (loading) {
       return <Loading />;
+    }
+    if (fastFoodItems.length === 0) {
+      return (
+        <div className="mt-5">
+          <div
+            className="container bg-orange-100 border-r-[5px] border-orange-500 text-orange-700 p-4 rounded-lg"
+            role="alert"
+          >
+            <p>برای کلیدواژه فوق هیچی آیتمی یافت نشد!</p>
+          </div>
+          <img
+            className="w-[500px] h-[400px] mx-auto flex items-center"
+            src={notFound}
+            alt="not found"
+          />
+        </div>
+      );
     }
     return (
       <div>
@@ -48,10 +68,16 @@ function App() {
   };
 
   return (
-    <div className="wrapper">
+    <div classNameName="wrapper">
       <Header></Header>
-      <CategoryList filterItem={filterItem}></CategoryList>
-      <div className="container">{renderContent()}</div>
+      <CategoryList filterItem={filterItem}>
+        <SearchBar
+          value={value}
+          setValue={setValue}
+          searchItem={searchItem}
+        ></SearchBar>
+      </CategoryList>
+      <div classNameName="container">{renderContent()}</div>
     </div>
   );
 }
