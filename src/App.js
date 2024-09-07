@@ -33,12 +33,16 @@ function App() {
   const [value, setValue] = useState("");
 
   const searchItem = async (term) => {
+    setLoading(true);
     const response = await axios.get(
       `FastFood/search/${term ? "?term=" + term : ""}`
     );
     setFastFoodItems(response.data);
+    setLoading(false);
   };
-
+  useEffect(() => {
+    searchItem();
+  }, []);
   const renderContent = () => {
     if (loading) {
       return <Loading />;
@@ -47,7 +51,7 @@ function App() {
       return (
         <div className="mt-5">
           <div
-            className="container bg-orange-100 border-r-[5px] border-orange-500 text-orange-700 p-4 rounded-lg"
+            className=" bg-orange-100 border-r-[5px] border-orange-500 text-orange-700 p-4 rounded-lg"
             role="alert"
           >
             <p>برای کلیدواژه فوق هیچی آیتمی یافت نشد!</p>
@@ -61,14 +65,14 @@ function App() {
       );
     }
     return (
-      <div>
+      <div className="">
         <FastFoodList fastFoodItems={fastFoodItems}></FastFoodList>
       </div>
     );
   };
 
   return (
-    <div classNameName="wrapper">
+    <div className="wrapper">
       <Header></Header>
       <CategoryList filterItem={filterItem}>
         <SearchBar
@@ -77,7 +81,7 @@ function App() {
           searchItem={searchItem}
         ></SearchBar>
       </CategoryList>
-      <div classNameName="container">{renderContent()}</div>
+      <div className="container">{renderContent()}</div>
     </div>
   );
 }

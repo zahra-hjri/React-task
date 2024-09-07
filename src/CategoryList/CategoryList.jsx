@@ -3,14 +3,14 @@ import axios from "../axios";
 import Loading from "../Loading/loading";
 
 const CategoryList = ({ filterItem, children }) => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     const fetchCategories = async () => {
       const response = await axios.get("/FoodCategory/categories");
       setCategories(response.data);
-      setLoading(false);
+      // setLoading(false);
     };
     fetchCategories();
     console.log(categories);
@@ -22,7 +22,10 @@ const CategoryList = ({ filterItem, children }) => {
     } else {
       return (
         <ul className="flex items-center gap-8 mx-8 h-full">
-          <li className="text-[12px] font-bold cursor-pointer hover:text-orange-600">
+          <li
+            onClick={() => filterItem()}
+            className="text-[12px] font-bold cursor-pointer hover:text-orange-600"
+          >
             <p>همه فست فودها</p>
           </li>
           {categories.map((category) => (
