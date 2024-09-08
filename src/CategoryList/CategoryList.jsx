@@ -21,7 +21,7 @@ const CategoryList = ({ filterItem, children }) => {
       return <Loading />;
     } else {
       return (
-        <ul className="flex items-center gap-8 mx-8 h-full">
+        <ul className="flex items-center gap-8 mx-8 h-full myElement">
           <li
             onClick={() => filterItem()}
             className="text-[12px] font-bold cursor-pointer hover:text-orange-600"

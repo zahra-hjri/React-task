@@ -3,7 +3,7 @@ import "./FastFoodCard.css";
 
 const FastFoodCard = ({ imageUrl, name, ingredients, price }) => {
   return (
-    <div className="card w-full relative flex-col shadow-2xl">
+    <div className="card w-full relative flex-col shadow-2xl  fade-in-horiz">
       <div className="">
         <span className="bg-green-500 flex items-center justify-center absolute top-4 right-4 text-white text-xs font-medium me-2 px-4 py-0.5 ">
           قیمت: {price.toLocaleString()} تومان
