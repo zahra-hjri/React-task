@@ -7,6 +7,7 @@ import Loading from "./Loading/loading";
 import FastFoodList from "./FastFoodList/FastFoodList";
 import SearchBar from "./SearchBar/searchBar";
 import notFound from "./assets/images/404.jpg";
+import { store } from "./store";
 
 function App() {
   //STATES
