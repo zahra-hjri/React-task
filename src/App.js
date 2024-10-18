@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import CategoryList from "./CategoryList/CategoryList";
 import Header from "./Header/header";
-import axios from "./axios";
 import Loading from "./Loading/loading";
 import FastFoodList from "./FastFoodList/FastFoodList";
 import SearchBar from "./SearchBar/searchBar";
@@ -11,29 +10,15 @@ import notFound from "./assets/images/404.jpg";
 function App() {
   //STATES
   const [loading, setLoading] = useState(false);
-  const [fastFoodItems, setFastFoodItems] = useState([]);
+  const [products, setProducts] = useState([]);
 
-  // FETCH
-  // const fetchData = async (categoryId = null) => {
-  //   setLoading(true);
-  //   const response = await axios.get(
-  //     `/FastFood/list/${categoryId ? "?categoryId=" + categoryId : ""}`
-  //   );
-  //   setFastFoodItems(response.data);
-  //   setLoading(false);
-  // };
-  // FILTER DATA FUNCTION
-  // const filterItem = (categoryId) => {
-  //   fetchData(categoryId);
-  // };
-
+  //Fetch Data
   const fetchData = async () => {
     setLoading(true);
     try {
       const response = await fetch("https://fakestoreapi.com/products");
       const data = await response.json();
-      console.log(`pro: ${data}`);
-      setFastFoodItems(data);
+      setProducts(data);
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
@@ -44,25 +29,58 @@ function App() {
   useEffect(() => {
     fetchData();
   }, []);
-  const [value, setValue] = useState("");
 
-  const searchItem = async (term) => {
+  //fetch category
+  const [categories, setCategories] = useState([]);
+
+  const fetchCategories = async () => {
     setLoading(true);
-    const response = await axios.get(
-      `FastFood/search/${term ? "?term=" + term : ""}`
-    );
-    setFastFoodItems(response.data);
-    setLoading(false);
+    try {
+      const response = await fetch(
+        "https://fakestoreapi.com/products/categories"
+      );
+      const data = await response.json();
+      setCategories(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  // handle search
+  const [searchItem, setSearchItem] = useState("");
+
+  const filteredBySearchProduct = products.filter((product) =>
+    product.title.toLowerCase().includes(searchItem.toLowerCase())
+  );
+
+  const searchHandle = () => {
+    setProducts(filteredBySearchProduct);
   };
   useEffect(() => {
-    searchItem();
-  }, []);
+    searchHandle();
+  }, [searchItem]);
+
+  //handle filter by category
+
+  const filterItem = (category) => {
+    const filteredByCategory = products.filter(
+      (item) => item.category === category
+    );
+
+    setProducts(filteredByCategory);
+  };
 
   const renderContent = () => {
     if (loading) {
       return <Loading />;
     }
-    if (fastFoodItems.length === 0) {
+    if (products.length === 0) {
       return (
         <div className="mt-5">
           <div
@@ -81,7 +99,7 @@ function App() {
     }
     return (
       <div className="">
-        <FastFoodList fastFoodItems={fastFoodItems}></FastFoodList>
+        <FastFoodList products={products}></FastFoodList>
       </div>
     );
   };
@@ -89,11 +107,16 @@ function App() {
   return (
     <div className="wrapper">
       <Header></Header>
-      <CategoryList>
+      <CategoryList
+        filterItem={filterItem}
+        categories={categories}
+        loading={loading}
+      >
         <SearchBar
-          value={value}
-          setValue={setValue}
           searchItem={searchItem}
+          setSearchItem={setSearchItem}
+          setProducts={setProducts}
+          filteredBySearchProduct={filteredBySearchProduct}
         ></SearchBar>
       </CategoryList>
       <div className="container">{renderContent()}</div>

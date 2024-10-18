@@ -1,13 +1,18 @@
 import { CiSearch } from "react-icons/ci";
-const SearchBar = ({ value, setValue, searchItem }) => {
+const SearchBar = ({
+  searchItem,
+  setSearchItem,
+  filteredBySearchProduct,
+  setProducts,
+}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    searchItem(value);
+    setProducts(filteredBySearchProduct);
   };
-  const handleChange = (e) => {
-    searchItem(value);
-    setValue(e.target.value);
+  const handleSearch = (event) => {
+    setSearchItem(event.target.value);
   };
+
   return (
     <form onSubmit={handleSubmit} className="w-[25%] mx-auto">
       <div className="relative flex gap-5">
@@ -19,8 +24,8 @@ const SearchBar = ({ value, setValue, searchItem }) => {
         </div>
         <input
           type="text"
-          value={value}
-          onChange={handleChange}
+          value={searchItem}
+          onChange={handleSearch}
           className="bg-transparent border border-gray-300 text-gray-500 text-sm focus:outline-none rounded-lg block w-full ps-12 p-2.5 "
           placeholder="search ..."
         />

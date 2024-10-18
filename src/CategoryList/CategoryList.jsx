@@ -1,41 +1,6 @@
-import { useEffect, useState } from "react";
-import axios from "../axios";
 import Loading from "../Loading/loading";
 
-const CategoryList = ({ filterItem, children }) => {
-  const [loading, setLoading] = useState(false);
-  const [categories, setCategories] = useState([]);
-
-  const fetchCategories = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch(
-        "https://fakestoreapi.com/products/categories"
-      );
-      const data = await response.json();
-      setCategories(data);
-      console.log(`categories:${categories}`);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchCategories();
-  }, []);
-
-  // useEffect(() => {
-  //   const fetchCategories = async () => {
-  //     const response = await axios.get("/FoodCategory/categories");
-  //     setCategories(response.data);
-  //     // setLoading(false);
-  //   };
-  //   fetchCategories();
-  //   console.log(categories);
-  // }, []);
-
+const CategoryList = ({ categories, filterItem, children, loading }) => {
   const renderContent = () => {
     if (loading) {
       return <Loading />;
@@ -67,7 +32,6 @@ const CategoryList = ({ filterItem, children }) => {
       <div className="bg-white rounded-[5px] shadow-lg h-[60px] flex items-center gap-10">
         {renderContent()}
         {children}
-        {/* <SearchBar /> */}
       </div>
     </nav>
   );
