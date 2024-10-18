@@ -6,15 +6,35 @@ const CategoryList = ({ filterItem, children }) => {
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
 
+  const fetchCategories = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(
+        "https://fakestoreapi.com/products/categories"
+      );
+      const data = await response.json();
+      setCategories(data);
+      console.log(`categories:${categories}`);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchCategories = async () => {
-      const response = await axios.get("/FoodCategory/categories");
-      setCategories(response.data);
-      // setLoading(false);
-    };
     fetchCategories();
-    console.log(categories);
   }, []);
+
+  // useEffect(() => {
+  //   const fetchCategories = async () => {
+  //     const response = await axios.get("/FoodCategory/categories");
+  //     setCategories(response.data);
+  //     // setLoading(false);
+  //   };
+  //   fetchCategories();
+  //   console.log(categories);
+  // }, []);
 
   const renderContent = () => {
     if (loading) {
@@ -26,15 +46,15 @@ const CategoryList = ({ filterItem, children }) => {
             onClick={() => filterItem()}
             className="text-[12px] font-bold cursor-pointer hover:text-orange-600"
           >
-            <p>همه فست فودها</p>
+            <p>All products</p>
           </li>
           {categories.map((category) => (
             <li
               className=" text-[12px] font-bold cursor-pointer hover:text-orange-600"
-              key={category.id}
-              onClick={() => filterItem(category.id)}
+              key={category}
+              onClick={() => filterItem(category)}
             >
-              {category.name}
+              {category}
             </li>
           ))}
         </ul>

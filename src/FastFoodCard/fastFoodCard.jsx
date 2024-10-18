@@ -1,15 +1,15 @@
 import { BiSolidShoppingBagAlt } from "react-icons/bi";
 import "./FastFoodCard.css";
 
-const FastFoodCard = ({ imageUrl, name, ingredients, price }) => {
+const FastFoodCard = ({ image, name, ingredients, price }) => {
   return (
     <div className="card w-full relative flex-col shadow-2xl  fade-in-horiz">
       <div className="">
         <span className="bg-green-500 flex items-center justify-center absolute top-4 right-4 text-white text-xs font-medium me-2 px-4 py-0.5 ">
           قیمت: {price.toLocaleString()} تومان
         </span>
-        <div className="card__img">
-          <img className="w-full h-full" src={imageUrl} alt={name} />
+        <div className="card__img flex justify-center items-center">
+          <img className="w-[50%] h-[50%]" src={image} alt={name} />
         </div>
       </div>
       <div className="flex flex-col py-4 text-center ">

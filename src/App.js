@@ -14,35 +14,50 @@ function App() {
   const [fastFoodItems, setFastFoodItems] = useState([]);
 
   // FETCH
-  const fetchData = async (categoryId = null) => {
-    setLoading(true);
-    const response = await axios.get(
-      `/FastFood/list/${categoryId ? "?categoryId=" + categoryId : ""}`
-    );
-    setFastFoodItems(response.data);
-    setLoading(false);
-  };
+  // const fetchData = async (categoryId = null) => {
+  //   setLoading(true);
+  //   const response = await axios.get(
+  //     `/FastFood/list/${categoryId ? "?categoryId=" + categoryId : ""}`
+  //   );
+  //   setFastFoodItems(response.data);
+  //   setLoading(false);
+  // };
   // FILTER DATA FUNCTION
-  const filterItem = (categoryId) => {
-    fetchData(categoryId);
+  // const filterItem = (categoryId) => {
+  //   fetchData(categoryId);
+  // };
+
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch("https://fakestoreapi.com/products");
+      const data = await response.json();
+      console.log(`pro: ${data}`);
+      setFastFoodItems(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
     fetchData();
   }, []);
-  const [value, setValue] = useState("");
+  // const [value, setValue] = useState("");
 
-  const searchItem = async (term) => {
-    setLoading(true);
-    const response = await axios.get(
-      `FastFood/search/${term ? "?term=" + term : ""}`
-    );
-    setFastFoodItems(response.data);
-    setLoading(false);
-  };
-  useEffect(() => {
-    searchItem();
-  }, []);
+  // const searchItem = async (term) => {
+  //   setLoading(true);
+  //   const response = await axios.get(
+  //     `FastFood/search/${term ? "?term=" + term : ""}`
+  //   );
+  //   setFastFoodItems(response.data);
+  //   setLoading(false);
+  // };
+  // useEffect(() => {
+  //   searchItem();
+  // }, []);
+
   const renderContent = () => {
     if (loading) {
       return <Loading />;
@@ -74,12 +89,12 @@ function App() {
   return (
     <div className="wrapper">
       <Header></Header>
-      <CategoryList filterItem={filterItem}>
-        <SearchBar
+      <CategoryList>
+        {/* <SearchBar
           value={value}
           setValue={setValue}
           searchItem={searchItem}
-        ></SearchBar>
+        ></SearchBar> */}
       </CategoryList>
       <div className="container">{renderContent()}</div>
     </div>

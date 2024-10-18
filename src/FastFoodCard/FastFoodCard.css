@@ -6,13 +6,13 @@
 .card__img {
   /* width: 100px; */
   height: 250px;
-  background-color: red;
+  background-color: #fff;
   animation-name: example;
   animation-duration: 1s;
   animation-iteration-count: infinite;
   animation-direction: alternate;
 }
-@keyframes example {
+/* @keyframes example {
   0% {
     background-color: rgb(208, 214, 216);
     left: 0px;
@@ -24,4 +24,4 @@
     left: 0px;
     top: 0px;
   }
-}
+} */
