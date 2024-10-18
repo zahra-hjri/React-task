@@ -44,19 +44,19 @@ function App() {
   useEffect(() => {
     fetchData();
   }, []);
-  // const [value, setValue] = useState("");
+  const [value, setValue] = useState("");
 
-  // const searchItem = async (term) => {
-  //   setLoading(true);
-  //   const response = await axios.get(
-  //     `FastFood/search/${term ? "?term=" + term : ""}`
-  //   );
-  //   setFastFoodItems(response.data);
-  //   setLoading(false);
-  // };
-  // useEffect(() => {
-  //   searchItem();
-  // }, []);
+  const searchItem = async (term) => {
+    setLoading(true);
+    const response = await axios.get(
+      `FastFood/search/${term ? "?term=" + term : ""}`
+    );
+    setFastFoodItems(response.data);
+    setLoading(false);
+  };
+  useEffect(() => {
+    searchItem();
+  }, []);
 
   const renderContent = () => {
     if (loading) {
@@ -90,11 +90,11 @@ function App() {
     <div className="wrapper">
       <Header></Header>
       <CategoryList>
-        {/* <SearchBar
+        <SearchBar
           value={value}
           setValue={setValue}
           searchItem={searchItem}
-        ></SearchBar> */}
+        ></SearchBar>
       </CategoryList>
       <div className="container">{renderContent()}</div>
     </div>

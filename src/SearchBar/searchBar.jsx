@@ -9,7 +9,7 @@ const SearchBar = ({ value, setValue, searchItem }) => {
     setValue(e.target.value);
   };
   return (
-    <form onSubmit={handleSubmit} className="w-[50%] mx-auto">
+    <form onSubmit={handleSubmit} className="w-[25%] mx-auto">
       <div className="relative flex gap-5">
         <div
           onClick={handleSubmit}
@@ -21,8 +21,8 @@ const SearchBar = ({ value, setValue, searchItem }) => {
           type="text"
           value={value}
           onChange={handleChange}
-          className="bg-transparent border border-gray-300 text-gray-500 text-sm focus:outline-none rounded-lg block w-full ps-14 p-2.5 "
-          placeholder="جستجوی فست فود"
+          className="bg-transparent border border-gray-300 text-gray-500 text-sm focus:outline-none rounded-lg block w-full ps-12 p-2.5 "
+          placeholder="search ..."
         />
       </div>
     </form>
