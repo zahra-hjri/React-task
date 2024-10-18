@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/React-Task/static/css/main.ef281585.css",
-    "main.js": "/React-Task/static/js/main.ade9f84c.js",
+    "main.css": "/React-Task/static/css/main.db878a63.css",
+    "main.js": "/React-Task/static/js/main.ef560ac0.js",
     "static/media/IRANSansWeb.ttf": "/React-Task/static/media/IRANSansWeb.e1f52c1cd3dc2b427b59.ttf",
     "index.html": "/React-Task/index.html",
-    "main.ef281585.css.map": "/React-Task/static/css/main.ef281585.css.map",
-    "main.ade9f84c.js.map": "/React-Task/static/js/main.ade9f84c.js.map"
+    "main.db878a63.css.map": "/React-Task/static/css/main.db878a63.css.map",
+    "main.ef560ac0.js.map": "/React-Task/static/js/main.ef560ac0.js.map"
   },
   "entrypoints": [
-    "static/css/main.ef281585.css",
-    "static/js/main.ade9f84c.js"
+    "static/css/main.db878a63.css",
+    "static/js/main.ef560ac0.js"
   ]
 }
