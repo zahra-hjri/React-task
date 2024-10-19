@@ -7,7 +7,7 @@ const Header = () => {
       <SiShopify className="h-32 w-32  mx-16" />
 
       <h2 className="text-white container text-end font-bold tracking-[5px] text-[24px]">
-        Online Shop
+        Online Shopping
       </h2>
     </header>
   );

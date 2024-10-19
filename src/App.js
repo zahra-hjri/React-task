@@ -3,7 +3,7 @@ import "./App.css";
 import CategoryList from "./CategoryList/CategoryList";
 import Header from "./Header/header";
 import Loading from "./Loading/loading";
-import FastFoodList from "./FastFoodList/FastFoodList";
+import ProductList from "./ProductList/ProductList";
 import SearchBar from "./SearchBar/searchBar";
 import notFound from "./assets/images/404.jpg";
 
@@ -67,13 +67,17 @@ function App() {
   }, [searchItem]);
 
   //handle filter by category
-
   const filterItem = (category) => {
-    const filteredByCategory = products.filter(
-      (item) => item.category === category
-    );
+    if (category === "All products") {
+      setProducts(products);
+    } else {
+      const filteredByCategory = products.filter(
+        (item) => item.category === category
+      );
 
-    setProducts(filteredByCategory);
+      setProducts(filteredByCategory);
+      console.log(products);
+    }
   };
 
   const renderContent = () => {
@@ -99,7 +103,7 @@ function App() {
     }
     return (
       <div className="">
-        <FastFoodList products={products}></FastFoodList>
+        <ProductList products={products} loading={loading}></ProductList>
       </div>
     );
   };

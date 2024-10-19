@@ -9,9 +9,6 @@ const SearchBar = ({
     e.preventDefault();
     setProducts(filteredBySearchProduct);
   };
-  const handleSearch = (event) => {
-    setSearchItem(event.target.value);
-  };
 
   return (
     <form onSubmit={handleSubmit} className="w-[25%] mx-auto">
@@ -25,7 +22,7 @@ const SearchBar = ({
         <input
           type="text"
           value={searchItem}
-          onChange={handleSearch}
+          onChange={(e) => setSearchItem(e.target.value)}
           className="bg-transparent border border-gray-300 text-gray-500 text-sm focus:outline-none rounded-lg block w-full ps-12 p-2.5 "
           placeholder="search ..."
         />
