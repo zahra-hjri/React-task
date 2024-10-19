@@ -11,7 +11,7 @@ const SearchBar = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-[25%] mx-auto">
+    <form onSubmit={handleSubmit} className="w-full lg:w-[20%]  mx-10">
       <div className="relative flex gap-5">
         <div
           onClick={handleSubmit}

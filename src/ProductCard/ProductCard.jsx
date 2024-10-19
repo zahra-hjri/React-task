@@ -18,9 +18,9 @@ const FastFoodCard = ({ image, title, price, loading }) => {
           price: {price.toLocaleString()} $
         </span>
 
-        <button className="w-[90%] h-8 bg-transparent bg-green-800 text-white  rounded-lg py-2 flex gap-3 justify-center items-center mx-5">
+        <button className="w-[90%] h-8 bg-transparent bg-white border-[1px] border-gray-800 text-gray-800 font-bold  rounded-lg py-2 flex gap-3 justify-center items-center mx-5">
           <span className="text-[12px] ">Add to cart</span>
-          <BiSolidShoppingBagAlt className="text-lg "></BiSolidShoppingBagAlt>
+          <BiSolidShoppingBagAlt className="text-2xl "></BiSolidShoppingBagAlt>
         </button>
       </div>
     </div>
