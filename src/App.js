@@ -24,7 +24,7 @@ const App = () => {
     setIsOpenMenu((prev) => !prev);
   };
 
-  //Fetch Data
+  //Fetch data
   const fetchData = async () => {
     setLoading(true);
     try {
@@ -43,7 +43,7 @@ const App = () => {
     fetchData();
   }, []);
 
-  //fetch category
+  //Fetch category
   const fetchCategories = async () => {
     setLoading(true);
     try {
@@ -63,7 +63,7 @@ const App = () => {
     fetchCategories();
   }, []);
 
-  // handle search
+  // Handle search
   const filteredBySearchProduct = products.filter((product) =>
     product.title.toLowerCase().includes(searchItem.toLowerCase())
   );
@@ -77,7 +77,7 @@ const App = () => {
     handleSearch();
   }, [searchItem]);
 
-  //handle filter by category
+  //Handle filter by category
   const filterItem = (category) => {
     setActiveCategory(category);
 
@@ -92,6 +92,7 @@ const App = () => {
     setCurrentPage(1);
   };
 
+  // Handle pagination
   const indexOfLastProduct = currentPage * itemsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
   const currentProducts = _.slice(
