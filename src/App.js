@@ -3,10 +3,8 @@ import _ from "lodash";
 import "./App.css";
 import CategoryList from "./Components/CategoryList";
 import Header from "./Components/Header";
-import Loading from "./Components/loading";
 import ProductList from "./Components/ProductList";
 import SearchBar from "./Components/SearchBar";
-import notFound from "./assets/images/404.jpg";
 import Pagination from "./Components/Pagination";
 
 const itemsPerPage = 6;
@@ -103,39 +101,6 @@ const App = () => {
   );
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
 
-  const renderContent = () => {
-    if (loading) {
-      return <Loading />;
-    }
-    if (currentProducts.length === 0) {
-      return (
-        <div className="mt-5">
-          <div
-            className="bg-gray-200 border-l-[8px] text-2xl border-gray-500 text-gray-700 p-4 rounded-lg"
-            role="alert"
-          >
-            <p>Not found</p>
-          </div>
-          <img
-            className="w-[500px] h-[400px] mx-auto flex items-center"
-            src={notFound}
-            alt="not found"
-          />
-        </div>
-      );
-    }
-    return (
-      <div>
-        <ProductList products={currentProducts} loading={loading} />
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          setCurrentPage={setCurrentPage}
-        />
-      </div>
-    );
-  };
-
   return (
     <div className="wrapper">
       <Header handleMenu={handleMenu} isOpenMenu={isOpenMenu} />
@@ -155,7 +120,16 @@ const App = () => {
           filteredBySearchProduct={filteredBySearchProduct}
         />
       </CategoryList>
-      <div className="container">{renderContent()}</div>
+
+      <div className="container">
+        <ProductList products={currentProducts} loading={loading} />
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          setCurrentPage={setCurrentPage}
+          loading={loading}
+        />
+      </div>
     </div>
   );
 };
