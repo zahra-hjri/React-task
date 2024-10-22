@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import _ from "lodash";
 import "./App.css";
-import CategoryList from "./Components/CategoryList";
+import CategoryList from "./Components/CategoryList/CategoryList";
 import Header from "./Components/Header";
 import ProductList from "./Components/ProductList";
 import SearchBar from "./Components/SearchBar";

@@ -1,6 +1,6 @@
 import NotFound from "./NotFound";
 import ProductCard from "./ProductCard/ProductCard";
-import Loading from "./loading";
+import Loading from "./Loading";
 
 const ProductList = ({ products, loading }) => {
   if (loading) {
