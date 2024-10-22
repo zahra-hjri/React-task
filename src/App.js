@@ -101,7 +101,6 @@ const App = () => {
     indexOfFirstProduct,
     indexOfLastProduct
   );
-
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
 
   const renderContent = () => {
@@ -112,7 +111,7 @@ const App = () => {
       return (
         <div className="mt-5">
           <div
-            className=" bg-gray-200 border-l-[8px] text-2xl border-gray-500 text-gray-700 p-4 rounded-lg"
+            className="bg-gray-200 border-l-[8px] text-2xl border-gray-500 text-gray-700 p-4 rounded-lg"
             role="alert"
           >
             <p>Not found</p>
@@ -126,7 +125,7 @@ const App = () => {
       );
     }
     return (
-      <div className="">
+      <div>
         <ProductList products={currentProducts} loading={loading} />
         <Pagination
           currentPage={currentPage}

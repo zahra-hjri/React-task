@@ -1,14 +1,9 @@
 body {
   overflow-y: scroll;
 }
-@font-face {
-  font-family: "IRANSansWeb";
-  src: url("./fonts//IRANSansWeb.ttf") format("truetype");
-}
 
 * {
   box-sizing: border-box;
-  font-family: "IRANSansWeb";
   margin: 0;
   padding: 0;
 }
