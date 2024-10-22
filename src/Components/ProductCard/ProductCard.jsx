@@ -20,7 +20,7 @@ const FastFoodCard = ({ image, title, price, loading }) => {
 
         <button className="w-[90%] h-8 bg-transparent bg-white border-[1px] border-gray-800 text-gray-800 font-bold  rounded-lg py-2 flex gap-3 justify-center items-center mx-5">
           <span className="text-[12px] ">Add to cart</span>
-          <BiSolidShoppingBagAlt className="text-2xl "></BiSolidShoppingBagAlt>
+          <BiSolidShoppingBagAlt className="text-2xl" />
         </button>
       </div>
     </div>

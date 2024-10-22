@@ -1,4 +1,5 @@
 import { CiSearch } from "react-icons/ci";
+
 const SearchBar = ({
   searchItem,
   setSearchItem,
@@ -11,7 +12,7 @@ const SearchBar = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full lg:w-[20%]  mx-10">
+    <form onSubmit={handleSubmit} className="w-full lg:w-[20%] mx-10">
       <div className="relative flex gap-5">
         <div
           onClick={handleSubmit}

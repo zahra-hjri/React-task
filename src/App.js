@@ -1,29 +1,30 @@
 import { useEffect, useState } from "react";
-import _ from "lodash"; // Import Lodash
+import _ from "lodash";
 import "./App.css";
-import CategoryList from "./CategoryList/CategoryList";
-import Header from "./Header/header";
-import Loading from "./Loading/loading";
-import ProductList from "./ProductList/ProductList";
-import SearchBar from "./SearchBar/searchBar";
+import CategoryList from "./Components/CategoryList";
+import Header from "./Components/Header";
+import Loading from "./Components/loading";
+import ProductList from "./Components/ProductList";
+import SearchBar from "./Components/SearchBar";
 import notFound from "./assets/images/404.jpg";
-import Paginating from "./Paginating/Paginating";
+import Pagination from "./Components/Pagination";
 
-function App() {
+const itemsPerPage = 6;
+
+const App = () => {
   //STATES
   const [loading, setLoading] = useState(false);
-  const [products, setProducts] = useState([]); // برای ذخیره لیست اصلی محصولات
-  const [filteredProducts, setFilteredProducts] = useState([]); // برای ذخیره محصولات فیلتر شده
-  const [activeCategory, setActiveCategory] = useState("All products"); // دسته‌بندی فعال
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [activeCategory, setActiveCategory] = useState("All products");
   const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [categories, setCategories] = useState([]);
+  const [searchItem, setSearchItem] = useState("");
 
   const handleMenu = () => {
     setIsOpenMenu((prev) => !prev);
   };
-
-  // صفحه‌بندی
-  const [currentPage, setCurrentPage] = useState(1); // شماره صفحه فعلی
-  const itemsPerPage = 6; // تعداد محصولات در هر صفحه
 
   //Fetch Data
   const fetchData = async () => {
@@ -31,8 +32,8 @@ function App() {
     try {
       const response = await fetch("https://fakestoreapi.com/products");
       const data = await response.json();
-      setProducts(data); // ذخیره محصولات اصلی
-      setFilteredProducts(data); // ابتدا همه محصولات را نمایش می‌دهیم
+      setProducts(data);
+      setFilteredProducts(data);
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
@@ -45,8 +46,6 @@ function App() {
   }, []);
 
   //fetch category
-  const [categories, setCategories] = useState([]);
-
   const fetchCategories = async () => {
     setLoading(true);
     try {
@@ -67,15 +66,13 @@ function App() {
   }, []);
 
   // handle search
-  const [searchItem, setSearchItem] = useState("");
-
   const filteredBySearchProduct = products.filter((product) =>
     product.title.toLowerCase().includes(searchItem.toLowerCase())
   );
 
   const handleSearch = () => {
-    setFilteredProducts(filteredBySearchProduct); // محصولات فیلتر شده بر اساس جستجو را به‌روزرسانی می‌کنیم
-    setCurrentPage(1); // بازنشانی به صفحه اول
+    setFilteredProducts(filteredBySearchProduct);
+    setCurrentPage(1);
   };
 
   useEffect(() => {
@@ -84,29 +81,28 @@ function App() {
 
   //handle filter by category
   const filterItem = (category) => {
-    setActiveCategory(category); // تنظیم دسته‌بندی فعال
+    setActiveCategory(category);
 
     if (category === "All products") {
-      setFilteredProducts(products); // اگر همه محصولات را می‌خواهیم، لیست اصلی را برمی‌گردانیم
+      setFilteredProducts(products);
     } else {
       const filteredByCategory = products.filter(
         (item) => item.category === category
       );
-      setFilteredProducts(filteredByCategory); // محصولات فیلتر شده بر اساس دسته‌بندی
+      setFilteredProducts(filteredByCategory);
     }
-    setCurrentPage(1); // بازنشانی به صفحه اول
+    setCurrentPage(1);
   };
 
-  // محاسبه محصولات صفحه فعلی
-  const indexOfLastProduct = currentPage * itemsPerPage; // آخرین ایندکس
-  const indexOfFirstProduct = indexOfLastProduct - itemsPerPage; // اولین ایندکس
+  const indexOfLastProduct = currentPage * itemsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
   const currentProducts = _.slice(
     filteredProducts,
     indexOfFirstProduct,
     indexOfLastProduct
-  ); // محصولات صفحه فعلی
+  );
 
-  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage); // تعداد صفحات
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
 
   const renderContent = () => {
     if (loading) {
@@ -131,9 +127,8 @@ function App() {
     }
     return (
       <div className="">
-        <ProductList products={currentProducts} loading={loading}></ProductList>
-        {/* Pagination Buttons*/}
-        <Paginating
+        <ProductList products={currentProducts} loading={loading} />
+        <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
           setCurrentPage={setCurrentPage}
@@ -144,7 +139,7 @@ function App() {
 
   return (
     <div className="wrapper">
-      <Header handleMenu={handleMenu} isOpenMenu={isOpenMenu}></Header>
+      <Header handleMenu={handleMenu} isOpenMenu={isOpenMenu} />
       <CategoryList
         filterItem={filterItem}
         categories={categories}
@@ -159,11 +154,11 @@ function App() {
           setSearchItem={setSearchItem}
           setProducts={setProducts}
           filteredBySearchProduct={filteredBySearchProduct}
-        ></SearchBar>
+        />
       </CategoryList>
       <div className="container">{renderContent()}</div>
     </div>
   );
-}
+};
 
 export default App;

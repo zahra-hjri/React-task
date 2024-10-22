@@ -1,4 +1,4 @@
-import Loading from "../Loading/loading";
+import Loading from "./loading";
 import { RxCross2 } from "react-icons/rx";
 
 const CategoryList = ({
