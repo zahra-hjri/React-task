@@ -63,7 +63,7 @@ const CategoryList = ({
             </ul>
           ) : (
             <ul
-              className={`hidden lg:flex items-center gap-8 mx-8 h-full myElement ${
+              className={`hidden lg:flex items-center gap-5 ms-5 h-full ${
                 isOpenMenu ? "" : ""
               }`}
             >
@@ -106,7 +106,7 @@ const CategoryList = ({
 
   return (
     <nav className="container !mt-[-30px]">
-      <div className="bg-white rounded-[5px] shadow-lg h-[60px] flex items-center gap-10">
+      <div className="bg-white rounded-[5px] shadow-lg h-[60px] flex items-center gap-5">
         {renderContent()}
         {children}
       </div>
