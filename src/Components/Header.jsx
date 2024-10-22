@@ -1,4 +1,3 @@
-import "./Header.css";
 import { SiShopify } from "react-icons/si";
 import { IoIosMenu } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
